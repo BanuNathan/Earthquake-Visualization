@@ -5,7 +5,7 @@ Welcome to the United States Geological Survey, or USGS for short! The USGS is r
    * A map using Leaflet that plots all of the earthquakes from the data set based on their longitude and latitude.
 
    * Data markers will reflect the magnitude of the earthquake by their size and and depth of the earth quake by color. 
-   * 
+   
    * Earthquakes with higher magnitudes should appear larger and earthquakes with greater depth should appear darker in color.
 
    *  Popups will provide additional information about the earthquake when a marker is clicked.
