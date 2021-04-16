@@ -12,4 +12,4 @@ Welcome to the United States Geological Survey, or USGS for short! The USGS is r
 
    * Legend that will provided with the context for the map data.
 
-  <img src = "https://github.com/BanuNathan/leaflet-challenge/blob/main/image/Screenshot%20(135).png">
+                            <img src = "https://github.com/BanuNathan/leaflet-challenge/blob/main/image/Screenshot%20(135).png">
