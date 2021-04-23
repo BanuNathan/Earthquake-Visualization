@@ -14,4 +14,4 @@ Welcome to the United States Geological Survey, or USGS for short! The USGS is r
 
    
    
-   <img src = "https://github.com/BanuNathan/leaflet-challenge/blob/main/image/Screenshot%20(138).png">
+   <img src = "https://github.com/BanuNathan/leaflet-challenge/blob/main/image/Screenshot%20(153).png">
