@@ -3,13 +3,15 @@ var { light, dark, street } = createBaseLayers();
 
 var url = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson"
 var earthQuakeMarkers = [];
-
+var tectonicPlateMarkers = [];
 //   // data markers should reflect the magnitude of the earthquake by their size and and depth of the earth quake by color. 
 //   // Earthquakes with higher magnitudes should appear larger and earthquakes with greater depth should appear darker in color.
 
 d3.json(url, parseJSON);
+d3.json("GeoJSON/PB2002_boundaries.json", parseBoundariesJSON);
 
-var earthQuakeLayer = L.layerGroup(earthQuakeMarkers);
+var earthQuakeLayer = L.layerGroup();
+var tectonicLayer = new L.layerGroup();
 
 // Only one base layer can be shown at a time
 var baseMaps = {
@@ -20,6 +22,7 @@ var baseMaps = {
 
 // Overlays that may be toggled on or off
 var overlayMaps = {
+  "Tectani Plates" : tectonicLayer,
   "EarthQuake": earthQuakeLayer,
 };
 
@@ -108,7 +111,7 @@ function parseJSON(response) {
     })
 
     earthQuakeMarkers.push(mCircle.bindPopup("<h2>" + earthQuake.properties.place + "</h2> <hr> <h3>Magnitude: " +
-      earthQuake.properties.mag + "</h3> <hr> <h3> depth:" + earthQuake.geometry.coordinates[2] + "</h3>").addTo(myMap));
+      earthQuake.properties.mag + "</h3> <hr> <h3> depth:" + earthQuake.geometry.coordinates[2] + "</h3>").addTo(earthQuakeLayer));
   }
 }
 
@@ -130,5 +133,32 @@ function getColor(depth) {
       return "#d4ee00";
     default:
       return "#98ee00";
+  }
+}
+
+
+function parseBoundariesJSON(response) {
+  console.log("tectanic plate boundary response")
+  console.log(response);
+  tectonicPlateMarkersList=[];
+  for (var i = 0; i < response.features.length; i++) {
+      for ( var j=0; j < response.features[i].geometry.coordinates.length; j++){
+        
+              var coord = response.features[i].geometry.coordinates[j];
+              tectonicPlateMarkersList.push(coord)              
+      }
+  }
+  for (x=0; x< tectonicPlateMarkersList.length; x++){
+
+     var plateCircle = L.circle([tectonicPlateMarkersList[x][1],tectonicPlateMarkersList[x][0]], {
+          color: "red",
+          fillColor: "red",
+          fillOpacity: 0.5,
+          radius: 1,
+          stroke: true,
+          weight: 0.1
+      }).addTo(tectonicLayer);
+
+      //tectonicPlateMarkers.push(plateCircle)
   }
 }
